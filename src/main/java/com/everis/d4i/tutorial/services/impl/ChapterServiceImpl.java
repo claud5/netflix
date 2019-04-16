@@ -35,18 +35,15 @@ public class ChapterServiceImpl implements ChapterService {
 	@Override
 	public ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
 			short chapterNumber) throws NetflixException {
-		Chapter chapter = chapterRepository
-				.findBySeasonTvShowIdAndSeasonNumberAndNumber(tvShowId, seasonNumber, chapterNumber)
-				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
+	
+		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
 		return modelMapper.map(chapter, ChapterRest.class);
 	}
 
 	@Override
 	public List<ActorRest> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId,
 			short seasonNumber, short chapterNumber) throws NetflixException {
-		Chapter chapter = chapterRepository
-				.findBySeasonTvShowIdAndSeasonNumberAndNumber(tvShowId, seasonNumber, chapterNumber)
-				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
+		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
 		
 		return chapter.getActors().stream().map(actors -> modelMapper.map(actors, ActorRest.class)).collect(Collectors.toList());
 	}
