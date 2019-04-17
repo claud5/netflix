@@ -1,21 +1,12 @@
 package com.everis.d4i.tutorial.services.impl;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.persistence.EntityNotFoundException;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.everis.d4i.tutorial.entities.AwardForShow;
 import com.everis.d4i.tutorial.entities.TvShow;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
-import com.everis.d4i.tutorial.json.AwardForShowRest;
-import com.everis.d4i.tutorial.json.AwardRest;
 import com.everis.d4i.tutorial.json.TvShowRest;
 import com.everis.d4i.tutorial.repositories.TvShowRepository;
 import com.everis.d4i.tutorial.services.TvShowService;
@@ -46,15 +37,16 @@ public class TvShowServiceImpl implements TvShowService {
 		return modelMapper.map(show, TvShowRest.class);
 	}
 	
-	@Override
-	public List<TvShowRest> getShowAwards() throws NetflixException {
-
-		
-		List<TvShow> awardForShowList = tvShowRepository.findAll();
-		
-		return awardForShowList.stream().map(award -> modelMapper.map(award, TvShowRest.class))
-			.collect(Collectors.toList());	
-		}
+//	@Override
+//	public List<Award> getShowAwards(Long id) throws NetflixException {
+//
+//		
+//		TvShow awardForShowList = tvShowRepository.findById(id)
+//				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_SHOW));
+//		
+//		return awardForShowList..stream().map(award -> modelMapper.map(award, TvShowRest.class))
+//			.collect(Collectors.toList());	
+//		}
 
 	@Override 
 	public TvShowRest updateName(String name, Long id) throws NetflixException {

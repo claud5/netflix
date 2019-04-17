@@ -25,7 +25,9 @@ public class RestConstants {
 	public static final String RESOURCE_ACTORS_IN_CHAPTER = "/{chapterNumber}/actors";
 	public static final String RESOURCE_CHAPTER_UPDATE_NAME = "/tv-shows/{tvShowId}/seasons/{seasonNumber}/chapters/{chapterId}/name/{newName}";
 
-
+	//AWARDS
+	public static final String RESOURCE_AWARD ="/awards";
+	public static final String RESOURCE_AWARD_IN_TVSHOW = "/tv-show/{tvShowId}";
 	// Specific values
 	public static final String PARAMETER_ID = "/{id}";
 	public static final String PARAMETER_NUMBER = "/{number}";

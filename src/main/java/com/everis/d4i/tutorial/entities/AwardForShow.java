@@ -37,7 +37,7 @@ public class AwardForShow implements Serializable{
 	private TvShow tvShow;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_AWARDS", nullable = false )
+	@JoinColumn(name = "ID_AWARD", nullable = false )
 	private Award awards;
 
 	
