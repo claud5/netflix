@@ -11,13 +11,13 @@ import com.everis.d4i.tutorial.responses.NetflixResponse;
 
 public interface TvShowController {
 
-//	NetflixResponse<List<TvShowRest>> getTvShowsByCategory(Long categoryId) throws NetflixException;
+	NetflixResponse<List<TvShowRest>> getTvShowsByCategory(Long categoryId) throws NetflixException;
 
 	NetflixResponse<TvShowRest> getTvShowById(Long id) throws NetflixException;
 
-//	NetflixResponse<List<TvShowRest>> getShowAwards() throws NetflixException;
+	NetflixResponse<TvShowRest> updateName(Long tvShowId, String newName) throws NetflixException;
 
-	NetflixResponse<TvShowRest> updateName(Long id, String name) throws NetflixException;
+	NetflixResponse<TvShowRest> addCategory(Long tvShowId, Long categoryId) throws NetflixException;
 
-
+	NetflixResponse<Boolean> deleteTvShowById(Long tvShowId);
 }

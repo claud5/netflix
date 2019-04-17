@@ -21,6 +21,8 @@ import javax.persistence.Table;
 @Table(name = "CATEGORIES")
 public class Category implements Serializable {
 
+	
+
 	/**
 	 * 
 	 */
@@ -59,6 +61,13 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
+	public List<TvShow> getTvShows() {
+		return tvShows;
+	}
+
+	public void setTvShows(List<TvShow> tvShows) {
+		this.tvShows = tvShows;
+	}
 
 	
 }

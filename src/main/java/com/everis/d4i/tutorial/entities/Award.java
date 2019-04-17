@@ -32,7 +32,7 @@ public class Award implements Serializable {
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "awards")
-	private List<AwardForShow> awardForShow;
+	private List<AwardForShow> awardsForShow;
 
 	
 	public Long getId() {
@@ -52,11 +52,11 @@ public class Award implements Serializable {
 	}
 
 	public List<AwardForShow> getAwardForShow() {
-		return awardForShow;
+		return awardsForShow;
 	}
 
 	public void setAwardForShow(List<AwardForShow> awardForShow) {
-		this.awardForShow = awardForShow;
+		this.awardsForShow = awardForShow;
 	}
 	
 	

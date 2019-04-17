@@ -61,8 +61,9 @@ public class ChapterControllerImpl implements ChapterController {
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@PatchMapping(value = RestConstants.RESOURCE_CHAPTER_UPDATE_NAME, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<ChapterRest> updateChapterName(@RequestParam Long tvShowId, @RequestParam short seasonNumber, @RequestParam short chapterNumber, @RequestParam String name) throws NetflixException {
+	public NetflixResponse<ChapterRest> updateChapterName(@PathVariable Long tvShowId, @PathVariable short seasonNumber, 
+			@PathVariable short chapterNumber, @RequestParam String newName) throws NetflixException {
 		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-				chapterService.updateChpaterName(tvShowId, seasonNumber, chapterNumber, name));
+				chapterService.updateChpaterName(tvShowId, seasonNumber, chapterNumber, newName));
 	}
 }
