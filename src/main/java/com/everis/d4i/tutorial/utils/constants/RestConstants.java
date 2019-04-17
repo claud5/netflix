@@ -6,12 +6,12 @@ public class RestConstants {
 	public static final String API_VERSION_1 = "/v1";
 	public static final String SUCCESS = "Success";
  
-	// Actors
-	public static final String RESOURCE_ACTORS = "/actors";
 
 	// Categories
 	public static final String RESOURCE_CATEGORY = "/categories";
-
+	public static final String RESOUCE_CATEGORY_DISABLE ="/{categoryId}/disable";
+	public static final String RESOURCE_CATEGORY_AVAILABLE = "/available";
+	
 	// TV-SHOW
 	public static final String RESOURCE_TV_SHOW = "/tv-shows";
 	public static final String RESOURCE_TV_SHOW_AWARDS = "/{tvShowId}/awards";
@@ -27,6 +27,9 @@ public class RestConstants {
 	public static final String RESOURCE_ACTORS_IN_CHAPTER = "/{chapterNumber}/actors";
 	public static final String RESOURCE_CHAPTER_UPDATE_NAME = "/{chapterNumber}/newName";
 
+	// Actors
+	public static final String RESOURCE_ACTORS = "/actors";
+	
 	//AWARDS
 	public static final String RESOURCE_AWARD ="/awards";
 	public static final String RESOURCE_AWARD_IN_TVSHOW = "/tv-show/{tvShowId}";

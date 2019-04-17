@@ -1,7 +1,8 @@
-INSERT INTO CATEGORIES(ID, NAME) VALUES 
-	(1, 'TERROR'), 
-	(2, 'COMEDIA'), 
-	(3, 'ACCIÓN');
+INSERT INTO CATEGORIES(ID, NAME, AVAILABLE) VALUES 
+	(1, 'TERROR',1 ), 
+	(2, 'COMEDIA',1 ), 
+	(3, 'ACCIÓN', 1);
+    
     
 INSERT INTO TV_SHOWS(ID, NAME, SHORT_DESC, LONG_DESC, YEAR, RECOMMENDED_AGE) VALUES 
 	(1, 'Juego de tronos', 'Descripción corta', 'Descripción larga', '2012', 16), 

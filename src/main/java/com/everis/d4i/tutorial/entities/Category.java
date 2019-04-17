@@ -42,8 +42,18 @@ public class Category implements Serializable {
 				inverseJoinColumns = {@JoinColumn(name = "SHOW_ID") })
 	private List<TvShow> tvShows = new ArrayList<>();
 
+	@Column(name = "AVAILABLE", unique = true)
+	private Boolean available;
 	
-	
+
+	public Boolean getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(Boolean available) {
+		this.available = available;
+	}
+
 
 	public Long getId() {
 		return id;
