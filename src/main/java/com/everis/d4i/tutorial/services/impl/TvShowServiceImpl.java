@@ -32,11 +32,11 @@ public class TvShowServiceImpl implements TvShowService {
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private ChapterRepository chapterRepository;
-			
+
 	private ModelMapper modelMapper = new ModelMapper();
 
-	
 	private static final int FIRST_POSITION = 0;
+
 	@Override
 	public List<TvShowRest> getTvShowsByCategory(Long categoryId) throws NetflixException {
 
@@ -94,38 +94,36 @@ public class TvShowServiceImpl implements TvShowService {
 	public List<ChapterInShow> getTvShowChapterFromActor(Long actorId) throws NetflixException {
 		List<ChapterInShow> chapterInShow = new LinkedList<ChapterInShow>();
 		List<TvShow> tvShowsByActor = tvShowRepository.findBySeasonsChaptersActorsId(actorId);
-		
+
 		List<TvShow> cleanTvShowByActor = new LinkedList<TvShow>();
-		
+
 		List<Chapter> chapterList = chapterRepository.findByActorsId(actorId);
 		List<ChapterRest> chapterRestList;
-		
+
 		cleanTvShowByActor.add(tvShowsByActor.get(FIRST_POSITION));
-		 for(int i = FIRST_POSITION+1; i < tvShowsByActor.size(); i++) {
-			 if(!tvShowsByActor.get(i).equals(tvShowsByActor.get(i-1))) {
-				cleanTvShowByActor.add(tvShowsByActor.get(i)); 
-			 }
-		 }
-		 
-		 
-		 
-		for(int i = 0; i < cleanTvShowByActor.size(); i++) {
+		for (int i = FIRST_POSITION + 1; i < tvShowsByActor.size(); i++) {
+			if (!tvShowsByActor.get(i).equals(tvShowsByActor.get(i - 1))) {
+				cleanTvShowByActor.add(tvShowsByActor.get(i));
+			}
+		}
+
+		for (int i = 0; i < cleanTvShowByActor.size(); i++) {
 			LinkedList<Chapter> finalChapterList = new LinkedList<Chapter>();
-			
-			for(int j = 0; j < chapterList.size(); j++) {
-				if(chapterList.get(j).getSeason().getTvShow().getId() == cleanTvShowByActor.get(i).getId()) {
+
+			for (int j = 0; j < chapterList.size(); j++) {
+				if (chapterList.get(j).getSeason().getTvShow().getId() == cleanTvShowByActor.get(i).getId()) {
 					finalChapterList.add(chapterList.get(j));
 				}
 			}
-			
-			chapterRestList = finalChapterList.stream()
-					.map(chapter -> modelMapper.map(chapter, ChapterRest.class)).collect(Collectors.toList());
-			
+
+			chapterRestList = finalChapterList.stream().map(chapter -> modelMapper.map(chapter, ChapterRest.class))
+					.collect(Collectors.toList());
+
 			chapterInShow.add(new ChapterInShow(cleanTvShowByActor.get(i).getId(), cleanTvShowByActor.get(i).getName(),
-					cleanTvShowByActor.get(i).getShortDescription(), chapterRestList ));
+					cleanTvShowByActor.get(i).getShortDescription(), chapterRestList));
 		}
-		
- 		return chapterInShow;
+
+		return chapterInShow;
 	}
 
 	private TvShow getById(Long id) throws NotFoundException {
@@ -137,7 +135,5 @@ public class TvShowServiceImpl implements TvShowService {
 	private TvShow saveTvShow(TvShow show) {
 		return tvShowRepository.saveAndFlush(show);
 	}
-
-	
 
 }

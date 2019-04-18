@@ -79,15 +79,13 @@ public class TvShowControllerImpl implements TvShowController {
 				tvShowService.deleteTvShowById(tvShowId));
 	}
 
-
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = RestConstants.RESOURCE_TV_SHOW_CHAPTER_FROM_ACTOR, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<List<ChapterInShow>> getShowAndChapterFromActor(@PathVariable Long actorId) throws NetflixException {
-		return new NetflixResponse<List<ChapterInShow>>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-				tvShowService.getTvShowChapterFromActor(actorId));
+	public NetflixResponse<List<ChapterInShow>> getShowAndChapterFromActor(@PathVariable Long actorId)
+			throws NetflixException {
+		return new NetflixResponse<List<ChapterInShow>>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+				CommonConstants.OK, tvShowService.getTvShowChapterFromActor(actorId));
 	}
-	
 
-	
 }

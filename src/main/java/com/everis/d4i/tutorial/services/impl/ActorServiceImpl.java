@@ -36,15 +36,13 @@ public class ActorServiceImpl implements ActorService {
 	@Override
 	public ActorRest getActorsById(long id) throws NetflixException {
 		Actors actor = getById(id);
-		
+
 		return modelMapper.map(actor, ActorRest.class);
 
 	}
-	
 
-
-	private Actors getById(Long id)  throws NetflixException{
+	private Actors getById(Long id) throws NetflixException {
 		return actorRepository.findById(id)
-		.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
+				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
 	}
 }
