@@ -18,7 +18,7 @@ public class RestConstants {
 	public static final String RESOURCE_TV_SHOW_UPDATE_NAME = "/{tvShowId}/newName";
 	public static final String RESOURCE_TV_SHOW_ADD_CATEGORY = "/{tvShowId}/category";
 	public static final String RESOURCE_TV_SHOW_DELETE = "/{tvShowId}/delete";
-	
+	public static final String RESOURCE_TV_SHOW_CHAPTER_FROM_ACTOR = "/chapters/actor/{actorId}";
 	//SEASONS
 	public static final String RESOURCE_SEASON = "/tv-shows/{tvShowId}/seasons";
 	

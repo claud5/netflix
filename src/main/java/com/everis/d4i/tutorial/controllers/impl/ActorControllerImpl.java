@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.everis.d4i.tutorial.controllers.ActorController;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.ActorRest;
+import com.everis.d4i.tutorial.json.ChapterInShowRest;
 import com.everis.d4i.tutorial.responses.NetflixResponse;
 import com.everis.d4i.tutorial.services.ActorService;
 import com.everis.d4i.tutorial.utils.constants.CommonConstants;
@@ -44,4 +45,5 @@ public class ActorControllerImpl implements ActorController {
 				actorService.getActorsById(id));
 	}
 
+	
 }

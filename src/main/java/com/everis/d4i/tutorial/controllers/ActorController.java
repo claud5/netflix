@@ -5,6 +5,7 @@ import java.util.List;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.ActorRest;
 import com.everis.d4i.tutorial.json.CategoryRest;
+import com.everis.d4i.tutorial.json.ChapterInShowRest;
 import com.everis.d4i.tutorial.responses.NetflixResponse;
 
 public interface ActorController {
@@ -13,5 +14,5 @@ public interface ActorController {
 	
 	NetflixResponse<ActorRest> getActorsById(Long id) throws NetflixException;
 	
-	
+
 }
