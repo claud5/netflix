@@ -31,7 +31,7 @@ public class AwardControllerImpl implements AwardController{
 	@GetMapping(value = RestConstants.RESOURCE_AWARD_IN_TVSHOW, produces = MediaType.APPLICATION_JSON_VALUE)
 		public NetflixResponse<List<AwardRest>> getAwardByTvShow(@PathVariable Long tvShowId) throws NetflixException {
 		
-		return new NetflixResponse<List<AwardRest>>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
 					CommonConstants.OK, awardService.getAwardByTvShow(tvShowId));
 		
 	}

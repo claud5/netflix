@@ -6,9 +6,8 @@ import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.AwardRest;
 import com.everis.d4i.tutorial.responses.NetflixResponse;
 
+public interface AwardController {
 
-public interface AwardController{
-	
 	NetflixResponse<List<AwardRest>> getAwardByTvShow(Long id) throws NetflixException;
 
 }

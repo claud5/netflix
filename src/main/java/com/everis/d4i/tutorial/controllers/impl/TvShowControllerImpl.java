@@ -52,7 +52,7 @@ public class TvShowControllerImpl implements TvShowController {
 	@PatchMapping(value = RestConstants.RESOURCE_TV_SHOW_UPDATE_NAME, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody NetflixResponse<TvShowRest> updateName(@PathVariable Long tvShowId, @RequestParam String newName) throws NetflixException {
 		
-		return new NetflixResponse<TvShowRest>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
+		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
 				tvShowService.updateName(newName, tvShowId));
 
 	}
@@ -62,7 +62,7 @@ public class TvShowControllerImpl implements TvShowController {
 	@PatchMapping(value = RestConstants.RESOURCE_TV_SHOW_ADD_CATEGORY, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody NetflixResponse<TvShowRest> addCategory(@PathVariable Long tvShowId, @RequestParam Long categoryId) throws NetflixException {
 		
-		return new NetflixResponse<TvShowRest>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
+		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
 				tvShowService.addCategory(tvShowId, categoryId));	
 		}
 
@@ -71,7 +71,7 @@ public class TvShowControllerImpl implements TvShowController {
 	@DeleteMapping(value = RestConstants.RESOURCE_TV_SHOW_DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public NetflixResponse<Boolean> deleteTvShowById(Long tvShowId) {
 		
-		return new NetflixResponse<Boolean>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
+		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
 				tvShowService.deleteTvShowById(tvShowId));
 	}
 

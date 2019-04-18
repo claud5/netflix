@@ -1,7 +1,6 @@
 package com.everis.d4i.tutorial.services.impl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -35,7 +34,7 @@ public class ChapterServiceImpl implements ChapterService {
 	@Override
 	public ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
 			short chapterNumber) throws NetflixException {
-	
+
 		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
 		return modelMapper.map(chapter, ChapterRest.class);
 	}
@@ -44,22 +43,21 @@ public class ChapterServiceImpl implements ChapterService {
 	public List<ActorRest> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId,
 			short seasonNumber, short chapterNumber) throws NetflixException {
 		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
-		
-		return chapter.getActors().stream().map(actors -> modelMapper.map(actors, ActorRest.class)).collect(Collectors.toList());
-	}
 
+		return chapter.getActors().stream().map(actors -> modelMapper.map(actors, ActorRest.class))
+				.collect(Collectors.toList());
+	}
 
 	@Override
 	public ChapterRest updateChpaterName(Long tvShowId, short seasonNumber, short chapterNumber, String name)
 			throws NetflixException {
-			Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
-			chapter.setName(name);
-			return saveChapter(chapter);
+		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
+		chapter.setName(name);
+		return saveChapter(chapter);
 	}
 
-	private Chapter getChapterById(Long tvShowId, short seasonNumber, short chapterNumber) throws NetflixException{
-		return chapterRepository
-				.findBySeasonTvShowIdAndSeasonNumberAndNumber(tvShowId, seasonNumber, chapterNumber)
+	private Chapter getChapterById(Long tvShowId, short seasonNumber, short chapterNumber) throws NetflixException {
+		return chapterRepository.findBySeasonTvShowIdAndSeasonNumberAndNumber(tvShowId, seasonNumber, chapterNumber)
 				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
 	}
 

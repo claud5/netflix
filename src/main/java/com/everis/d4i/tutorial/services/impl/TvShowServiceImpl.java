@@ -24,7 +24,7 @@ public class TvShowServiceImpl implements TvShowService {
 	private TvShowRepository tvShowRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	private ModelMapper modelMapper = new ModelMapper();
 
 	@Override
@@ -37,61 +37,56 @@ public class TvShowServiceImpl implements TvShowService {
 
 	@Override
 	public TvShowRest getTvShowById(Long id) throws NetflixException {
-		
-		TvShow show =  getById(id);
-				
+
+		TvShow show = getById(id);
 		return modelMapper.map(show, TvShowRest.class);
 	}
 
-	@Override 
+	@Override
 	public TvShowRest updateName(String name, Long id) throws NetflixException {
-		TvShow show = getById(id);
 
+		TvShow show = getById(id);
 		show.setName(name);
-		
+
 		return modelMapper.map(saveTvShow(show), TvShowRest.class);
 	}
 
-	
 	@Override
 	public TvShowRest addCategory(Long tvShowId, Long categoryId) throws NetflixException {
 		TvShow show = getById(tvShowId);
 		Category category = categoryRepository.findById(categoryId)
 				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CATEGORY));
-		
-		List<Category> categoriesList = show.getCategories();	
+
+		List<Category> categoriesList = show.getCategories();
 		categoriesList.add(category);
 		show.setCategories(categoriesList);
-		
+
 		List<TvShow> showList = category.getTvShows();
 		showList.add(show);
 		category.setTvShows(showList);
 		categoryRepository.saveAndFlush(category);
-		
+
 		return modelMapper.map(saveTvShow(show), TvShowRest.class);
 	}
-	
+
 	@Override
-	public Boolean deleteTvShowById(Long id)  {
+	public Boolean deleteTvShowById(Long id) {
 		try {
-			tvShowRepository.deleteById(id);		
+			tvShowRepository.deleteById(id);
 			return true;
-		}catch(IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			return false;
 		}
 	}
-	
+
 	private TvShow getById(Long id) throws NotFoundException {
 		return tvShowRepository.findById(id)
-		.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_SHOW));
-		
+				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_SHOW));
+
 	}
-	
+
 	private TvShow saveTvShow(TvShow show) {
 		return tvShowRepository.saveAndFlush(show);
 	}
-
-
-
 
 }

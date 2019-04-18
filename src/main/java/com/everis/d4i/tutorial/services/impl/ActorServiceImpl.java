@@ -20,7 +20,6 @@ public class ActorServiceImpl implements ActorService {
 
 	@Autowired
 	private ActorRepository actorRepository;
-
 	private ModelMapper modelMapper = new ModelMapper();
 
 	@Override
@@ -35,7 +34,7 @@ public class ActorServiceImpl implements ActorService {
 	public ActorRest getActorsById(long id) throws NetflixException {
 		Actors actor = actorRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
-		
+
 		return modelMapper.map(actor, ActorRest.class);
 
 	}

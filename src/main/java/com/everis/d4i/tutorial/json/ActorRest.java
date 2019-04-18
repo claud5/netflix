@@ -44,7 +44,7 @@ public class ActorRest implements Serializable {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
+
 		return getName() + " " +
 				getSurname() + " " + getDate_of_birth();
 	}

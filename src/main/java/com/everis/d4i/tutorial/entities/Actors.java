@@ -3,19 +3,18 @@ package com.everis.d4i.tutorial.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "ACTORS")
@@ -85,13 +84,5 @@ public class Actors implements Serializable {
 		chapters.remove(chapter);
 		chapter.getActors().remove(this);
 	}
-	
-//	
-//	@Override
-//	public String toString() {
-//		// TODO Auto-generated method stub
-//		return getId() + " " + getName() + " " +
-//				getSurname() + " " + getDate_of_birth();
-//	}
 
 }
