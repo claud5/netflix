@@ -4,13 +4,6 @@ import java.util.List;
 
 import com.everis.d4i.tutorial.entities.ChapterInShow;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
-<<<<<<< HEAD
-import com.everis.d4i.tutorial.json.ActorRest;
-import com.everis.d4i.tutorial.json.AwardForShowRest;
-import com.everis.d4i.tutorial.json.AwardRest;
-import com.everis.d4i.tutorial.json.ChapterInShowRest;
-=======
->>>>>>> 0e562c9d984956d288cbaeda26cde4a0f3857996
 import com.everis.d4i.tutorial.json.TvShowRest;
 import com.everis.d4i.tutorial.responses.NetflixResponse;
 
