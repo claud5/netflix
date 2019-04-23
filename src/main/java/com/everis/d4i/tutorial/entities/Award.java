@@ -10,8 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,7 +30,7 @@ public class Award implements Serializable {
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "awards")
-	private List<AwardForShow> award_for_show;
+	private List<AwardForShow> awardsForShow;
 
 	
 	public Long getId() {
@@ -50,6 +48,16 @@ public class Award implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public List<AwardForShow> getAwardForShow() {
+		return awardsForShow;
+	}
+
+	public void setAwardForShow(List<AwardForShow> awardForShow) {
+		this.awardsForShow = awardForShow;
+	}
+	
+	
 	
 
 }

@@ -19,6 +19,7 @@ import com.everis.d4i.tutorial.entities.Actors;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.ActorRest;
 import com.everis.d4i.tutorial.repositories.ActorRepository;
+import com.everis.d4i.tutorial.utils.constants.TestsConstants;
 
 
 public class ActorServiceImplTest {
@@ -28,16 +29,8 @@ public class ActorServiceImplTest {
 	private List<Actors> actorList;
 	private List<ActorRest> actorRestList;
 
-	private static final int ACTOR_BIRTH_YEAR = 1986;
-	private static final int ACTOR_BIRTH_MONTH = 10;
-	private static final int ACTOR_BIRTH_DAY = 23;
-	private static final String ACTOR_NAME = "EMILIA";
-	private static final String ACTOR_SURNAME = "CLARKE";
-	private static final long ACTOR_ID = 1L;
-	private static final long ACTOR_WRONG_ID = 10L;
-	
-	private static final int LIST_LENGTH = 6;
-	private static final int INDEX = 0;
+	public static final int ACTOR_LIST_LENGTH = 6;
+
 	
 	@Mock
 	private ActorRepository actorRepository;
@@ -62,11 +55,11 @@ public class ActorServiceImplTest {
 
 		// Creem actor que ens retorna bbdd
 		Actors actor = new Actors();
-		actor.setId(ACTOR_ID);
-		actor.setName(ACTOR_NAME);
-		actor.setSurname(ACTOR_SURNAME);
-		actor.setDate_of_birth(LocalDate.of(ACTOR_BIRTH_YEAR,
-				ACTOR_BIRTH_MONTH, ACTOR_BIRTH_DAY));
+		actor.setId(TestsConstants.ACTOR_ID);
+		actor.setName(TestsConstants.ACTOR_NAME);
+		actor.setSurname(TestsConstants.ACTOR_SURNAME);
+		actor.setDate_of_birth(LocalDate.of(TestsConstants.ACTOR_BIRTH_YEAR,
+				TestsConstants.ACTOR_BIRTH_MONTH, TestsConstants.ACTOR_BIRTH_DAY));
 
 		return actor;
 	}
@@ -75,10 +68,10 @@ public class ActorServiceImplTest {
 
 		// Creem actor que es el que esperem rebre
 		ActorRest actor = new ActorRest();
-		actor.setName(ACTOR_NAME);
-		actor.setSurname(ACTOR_SURNAME);
-		actor.setDate_of_birth(LocalDate.of(ACTOR_BIRTH_YEAR, ACTOR_BIRTH_MONTH,
-				ACTOR_BIRTH_DAY));
+		actor.setName(TestsConstants.ACTOR_NAME);
+		actor.setSurname(TestsConstants.ACTOR_SURNAME);
+		actor.setDate_of_birth(LocalDate.of(TestsConstants.ACTOR_BIRTH_YEAR, TestsConstants.ACTOR_BIRTH_MONTH,
+				TestsConstants.ACTOR_BIRTH_DAY));
 
 		return actor;
 	}
@@ -86,7 +79,7 @@ public class ActorServiceImplTest {
 	private List<Actors> createActorsList(){
 		List<Actors> list = new ArrayList<Actors>();
 		
-		for (int i = 0; i < LIST_LENGTH; i++) {
+		for (int i = 0; i < ACTOR_LIST_LENGTH; i++) {
 			list.add(actor);
 		}
 		return list;
@@ -97,7 +90,7 @@ public class ActorServiceImplTest {
 		
 		List<ActorRest> list = new ArrayList<ActorRest>();
 		
-		for (int i = 0; i < LIST_LENGTH; i++) {
+		for (int i = 0; i < ACTOR_LIST_LENGTH; i++) {
 			list.add(actorRest);
 		}
 		return list;
@@ -110,10 +103,10 @@ public class ActorServiceImplTest {
 	public void shouldReturnAnActor() throws Exception {
 
 		// given
-		Mockito.when(actorRepository.findById(ACTOR_ID)).thenReturn(Optional.of(actor));
+		Mockito.when(actorRepository.findById(TestsConstants.ACTOR_ID)).thenReturn(Optional.of(actor));
 
 		// when
-		ActorRest finalActor = actorServiceImpl.getActorsById(ACTOR_ID);
+		ActorRest finalActor = actorServiceImpl.getActorsById(TestsConstants.ACTOR_ID);
 	
 		// then
 		assertEquals(actorRest, finalActor);
@@ -129,8 +122,8 @@ public class ActorServiceImplTest {
 		List<ActorRest> finalActorsList = actorServiceImpl.getActors();
 
 		// then
-		assertEquals(actorRestList.get(INDEX), finalActorsList.get(INDEX));
-		assertEquals(LIST_LENGTH, finalActorsList.size());
+		assertEquals(actorRestList.get(TestsConstants.INDEX), finalActorsList.get(TestsConstants.INDEX));
+		assertEquals(ACTOR_LIST_LENGTH, finalActorsList.size());
 		
 	
 	}
@@ -139,9 +132,9 @@ public class ActorServiceImplTest {
 	@Test (expected = NotFoundException.class)
 	public void shouldReturnActorKO() throws Exception{
 		
-		Mockito.when(actorRepository.findById(ACTOR_WRONG_ID)).thenReturn(Optional.empty());
+		Mockito.when(actorRepository.findById(TestsConstants.ACTOR_WRONG_ID)).thenReturn(Optional.empty());
 		
-		actorServiceImpl.getActorsById(ACTOR_WRONG_ID);
+		actorServiceImpl.getActorsById(TestsConstants.ACTOR_WRONG_ID);
 	
 		fail();
 	}

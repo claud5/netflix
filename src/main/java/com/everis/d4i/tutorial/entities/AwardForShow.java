@@ -2,7 +2,6 @@ package com.everis.d4i.tutorial.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -37,7 +35,7 @@ public class AwardForShow implements Serializable{
 	private TvShow tvShow;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_AWARDS", nullable = false )
+	@JoinColumn(name = "ID_AWARD", nullable = false )
 	private Award awards;
 
 	

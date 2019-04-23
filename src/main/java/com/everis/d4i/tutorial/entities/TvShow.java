@@ -12,9 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -54,7 +52,7 @@ public class TvShow implements Serializable {
 	private List<Season> seasons;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tvShow")
-	private List<AwardForShow> awardForShow;
+	private List<AwardForShow> awardsForShow;
 
 
 	public Long getId() {
@@ -130,11 +128,11 @@ public class TvShow implements Serializable {
 	}
 
 	public List<AwardForShow> getAwardForShow() {
-		return awardForShow;
+		return awardsForShow;
 	}
 
 	public void setAwardForShow(List<AwardForShow> awardForShow) {
-		this.awardForShow = awardForShow;
+		this.awardsForShow = awardForShow;
 	}
 	
 	

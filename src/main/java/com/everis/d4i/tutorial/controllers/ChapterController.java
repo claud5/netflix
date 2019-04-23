@@ -15,10 +15,10 @@ public interface ChapterController {
 	NetflixResponse<ChapterRest> getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
 			short chapterNumber) throws NetflixException;
 
-	NetflixResponse<List<ActorRest>> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
-			short chapterNumber) throws NetflixException;
+	NetflixResponse<List<ActorRest>> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId,
+			short seasonNumber, short chapterNumber) throws NetflixException;
 
-	NetflixResponse<ChapterRest> updateChapterName(Long tvShowId, short seasonNumber,
-			short chapterNumber, String name) throws NetflixException;
+	NetflixResponse<ChapterRest> updateChapterName(Long tvShowId, short seasonNumber, short chapterNumber,
+			String newName) throws NetflixException;
 
 }
