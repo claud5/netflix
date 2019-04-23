@@ -49,10 +49,10 @@ public class TvShow implements Serializable {
 
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tvShow")
-	private List<Season> seasons;
+	private List<Season> seasons = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tvShow")
-	private List<AwardForShow> awardsForShow;
+	private List<TvShowAwards> awardsForShow = new ArrayList<>();
 
 
 	public Long getId() {
@@ -127,11 +127,11 @@ public class TvShow implements Serializable {
 		this.categories = categories;
 	}
 
-	public List<AwardForShow> getAwardForShow() {
+	public List<TvShowAwards> getAwardForShow() {
 		return awardsForShow;
 	}
 
-	public void setAwardForShow(List<AwardForShow> awardForShow) {
+	public void setAwardForShow(List<TvShowAwards> awardForShow) {
 		this.awardsForShow = awardForShow;
 	}
 	

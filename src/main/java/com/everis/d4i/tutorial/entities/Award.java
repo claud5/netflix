@@ -1,6 +1,8 @@
 package com.everis.d4i.tutorial.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,8 +31,8 @@ public class Award implements Serializable {
 	@Column(name = "NAME", unique = true)
 	private String name;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "awards")
-	private List<AwardForShow> awardsForShow;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "award")
+	private List<TvShowAwards> awardsForShow = new ArrayList<>();
 
 	
 	public Long getId() {
@@ -49,11 +51,11 @@ public class Award implements Serializable {
 		this.name = name;
 	}
 
-	public List<AwardForShow> getAwardForShow() {
+	public List<TvShowAwards> getAwardForShow() {
 		return awardsForShow;
 	}
 
-	public void setAwardForShow(List<AwardForShow> awardForShow) {
+	public void setAwardForShow(List<TvShowAwards> awardForShow) {
 		this.awardsForShow = awardForShow;
 	}
 	

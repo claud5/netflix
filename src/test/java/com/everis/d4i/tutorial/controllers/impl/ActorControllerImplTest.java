@@ -15,7 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 
-import com.everis.d4i.tutorial.entities.Actors;
+import com.everis.d4i.tutorial.entities.Actor;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.ActorRest;
 import com.everis.d4i.tutorial.repositories.ActorRepository;
@@ -28,9 +28,9 @@ import com.everis.d4i.tutorial.utils.constants.TestsConstants;
 
 public class ActorControllerImplTest {
 
-	private Actors actor;
+	private Actor actor;
 	private ActorRest actorRest;
-	private List<Actors> actorList;
+	private List<Actor> actorList;
 	private List<ActorRest> actorRestList;
 
 	@Mock
@@ -47,10 +47,10 @@ public class ActorControllerImplTest {
 	}
 	
 	private void createActorsStructure() {
-		this.actor = new Actors();
+		this.actor = new Actor();
 		this.actorRest = new ActorRest();
 		
-		this.actorList = new ArrayList<Actors>();
+		this.actorList = new ArrayList<Actor>();
 		this.actorList.add(actor);
 		this.actorRestList = new ArrayList<ActorRest>();
 		this.actorRestList.add(actorRest);

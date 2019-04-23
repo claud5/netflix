@@ -37,7 +37,7 @@ public class CategoryControllerImpl implements CategoryController {
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@PatchMapping(value = RestConstants.RESOUCE_CATEGORY_DISABLE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<CategoryRest> deleteCategoryAvailability(Long categoryId) throws NetflixException {
+	public NetflixResponse<CategoryRest> deleteCategoryAvailability(final Long categoryId) throws NetflixException {
 		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
 				categoryService.disableCategory(categoryId));
 	}

@@ -8,6 +8,6 @@ import com.everis.d4i.tutorial.responses.NetflixResponse;
 
 public interface AwardController {
 
-	NetflixResponse<List<AwardRest>> getAwardByTvShow(Long id) throws NetflixException;
+	NetflixResponse<List<AwardRest>> getAwardByTvShow(final Long id) throws NetflixException;
 
 }

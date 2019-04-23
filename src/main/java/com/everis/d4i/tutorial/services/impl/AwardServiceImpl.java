@@ -20,7 +20,7 @@ public class AwardServiceImpl implements AwardService {
 	private ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	public List<AwardRest> getAwardByTvShow(Long id) throws NetflixException {
+	public List<AwardRest> getAwardByTvShow(final Long id) throws NetflixException {
 
 		return awardRepository.findByAwardsForShowTvShowId(id).stream()
 				.map(award -> modelMapper.map(award, AwardRest.class)).collect(Collectors.toList());
