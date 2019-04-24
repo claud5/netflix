@@ -92,7 +92,7 @@ public class ActorControllerImplTest {
 		
 	}
 	
-
+	//KO
 	@Test(expected=NotFoundException.class)
 	public void shouldreturnAnActorKo() throws Exception {
 
