@@ -33,7 +33,7 @@ public class RestConstants {
 	//AWARDS
 	public static final String RESOURCE_AWARD ="/awards";
 	public static final String RESOURCE_AWARD_IN_TVSHOW = "/tv-show/{tvShowId}";
-
+	public static final String RESOURCE_SET_AWARD_TVSHOW = "/tv-show/";
 	// Specific values
 	public static final String PARAMETER_ID = "/{id}";
 	public static final String PARAMETER_NUMBER = "/{number}";

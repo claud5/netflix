@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.everis.d4i.tutorial.entities.Category;
 import com.everis.d4i.tutorial.entities.Chapter;
 import com.everis.d4i.tutorial.entities.TvShow;
-import com.everis.d4i.tutorial.entities.TvShow2;
+import com.everis.d4i.tutorial.entities.TvShowChapters;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.ChapterRest;
@@ -83,17 +83,12 @@ public class TvShowServiceImpl implements TvShowService {
 	}
 
 	@Override
-	public Boolean deleteTvShowById(final Long id) {
-		try {
-			tvShowRepository.deleteById(id);
-			return true;
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
+	public void deleteTvShowById(final Long id) throws NetflixException{
+		tvShowRepository.deleteById(id);
 	}
 
 	@Override
-	public List<TvShow2> getTvShowChapterFromActor(final Long actorId) throws NetflixException {
+	public List<TvShowChapters> getTvShowChapterFromActor(final Long actorId) throws NetflixException {
 		HashSet<TvShow> tvShowsByActor = tvShowRepository.findBySeasonsChaptersActorsId(actorId);
 
 		Map<Long, List<TvShow>> cleanTvShowByActor = tvShowsByActor.stream()
@@ -102,12 +97,12 @@ public class TvShowServiceImpl implements TvShowService {
 		return organizesTvShowByActor(cleanTvShowByActor, actorId);
 	}
 
-	private List<TvShow2> organizesTvShowByActor(Map<Long, List<TvShow>> cleanTvShowByActor, final Long actorId) {
+	private List<TvShowChapters> organizesTvShowByActor(final Map<Long, List<TvShow>> cleanTvShowByActor, final Long actorId) {
 		List<Chapter> chapters = chapterRepository.findByActorsId(actorId);
-		List<TvShow2> tvShowList = new ArrayList<TvShow2>();
+		List<TvShowChapters> tvShowList = new ArrayList<TvShowChapters>();
 
 		cleanTvShowByActor.entrySet().stream().forEach(show -> show.getValue().stream().forEach(finalShow -> {
-			TvShow2 tv = new TvShow2();
+			TvShowChapters tv = new TvShowChapters();
 			tv.setId(finalShow.getId());
 			tv.setName(finalShow.getName());
 			tv.setShortDescription(finalShow.getShortDescription());
@@ -128,13 +123,13 @@ public class TvShowServiceImpl implements TvShowService {
 		return tvShowList;
 	}
 
-	private TvShow getById(Long id) throws NotFoundException {
+	private TvShow getById(final Long id) throws NotFoundException {
 		return tvShowRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_SHOW));
 
 	}
 
-	private TvShow saveTvShow(TvShow show) {
+	private TvShow saveTvShow(final TvShow show) {
 		return tvShowRepository.saveAndFlush(show);
 	}
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.d4i.tutorial.controllers.TvShowController;
-import com.everis.d4i.tutorial.entities.TvShow2;
+import com.everis.d4i.tutorial.entities.TvShowChapters;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.TvShowRest;
 import com.everis.d4i.tutorial.responses.NetflixResponse;
@@ -71,18 +71,17 @@ public class TvShowControllerImpl implements TvShowController {
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@DeleteMapping(value = RestConstants.RESOURCE_TV_SHOW_DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<Boolean> deleteTvShowById(final Long tvShowId) {
-
-		return new NetflixResponse<Boolean>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.NO_CONTENT), CommonConstants.OK,
-				tvShowService.deleteTvShowById(tvShowId));
+	public NetflixResponse<Boolean> deleteTvShowById(final Long tvShowId) throws NetflixException {
+		tvShowService.deleteTvShowById(tvShowId);
+		return new NetflixResponse<Boolean>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.NO_CONTENT), CommonConstants.OK);
 	}
 
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = RestConstants.RESOURCE_TV_SHOW_CHAPTER_FROM_ACTOR, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<List<TvShow2>> getShowAndChapterFromActor(@PathVariable final Long actorId)
+	public NetflixResponse<List<TvShowChapters>> getShowAndChapterFromActor(@PathVariable final Long actorId)
 			throws NetflixException {
-		return new NetflixResponse<List<TvShow2>>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+		return new NetflixResponse<List<TvShowChapters>>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
 				CommonConstants.OK, tvShowService.getTvShowChapterFromActor(actorId));
 	}
 

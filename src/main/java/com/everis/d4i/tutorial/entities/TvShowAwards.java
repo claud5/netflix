@@ -1,13 +1,12 @@
 package com.everis.d4i.tutorial.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,60 +17,46 @@ import javax.persistence.Table;
 @Table(name = "AWARD_FOR_SHOW")
 public class TvShowAwards implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3283401562922075555L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "DATE", unique = true)
-	private Date date;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_SHOW", nullable = false )
 	private TvShow tvShow;
 	
+	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_AWARD", nullable = false )
 	private Award award;
 
-	
-	
-	
-	public Long getId() {
-		return id;
-	}
+	@Column(name = "DATE", unique = true)
+	private LocalDate date;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(LocalDate localDate) {
+		this.date = localDate;
 	}
 
-	public TvShow getTvShows() {
+	public TvShow getTvShow() {
 		return tvShow;
 	}
 
-	public void setTvShows(TvShow tvShows) {
-		this.tvShow = tvShows;
+	public void setTvShow(TvShow tvShow) {
+		this.tvShow = tvShow;
 	}
 
-	public Award getAwards() {
+	public Award getAward() {
 		return award;
 	}
 
-	public void setAwards(Award awards) {
-		this.award = awards;
+	public void setAward(Award award) {
+		this.award = award;
 	}
+
+	
 
 
 	

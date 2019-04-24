@@ -22,39 +22,28 @@ public class TvShow implements Serializable {
 
 	private static final long serialVersionUID = 4916713904971425156L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "SHORT_DESC", nullable = true)
 	private String shortDescription;
 
-	@Column(name = "LONG_DESC", nullable = true)
 	private String longDescription;
 
-	@Column(name = "YEAR")
 	private Year year;
 
-	@Column(name = "RECOMMENDED_AGE")
 	private byte recommendedAge;
 
-	@Column(name = "ADVERTISING", nullable = true)
 	private String advertising;
-	
-	@ManyToMany(mappedBy = "tvShows")
+
 	private List<Category> categories = new ArrayList<>();
 
+	private List<Season> seasons = new ArrayList<>(0);
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tvShow")
-	private List<Season> seasons = new ArrayList<>();
+	private List<TvShowAwards> tvShowAwards = new ArrayList<>(0);
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tvShow")
-	private List<TvShowAwards> awardsForShow = new ArrayList<>();
-
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -62,7 +51,8 @@ public class TvShow implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	@Column(name = "NAME")
 	public String getName() {
 		return name;
 	}
@@ -70,7 +60,8 @@ public class TvShow implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	@Column(name = "SHORT_DESC", nullable = true)
 	public String getShortDescription() {
 		return shortDescription;
 	}
@@ -79,6 +70,7 @@ public class TvShow implements Serializable {
 		this.shortDescription = shortDescription;
 	}
 
+	@Column(name = "LONG_DESC", nullable = true)
 	public String getLongDescription() {
 		return longDescription;
 	}
@@ -87,6 +79,7 @@ public class TvShow implements Serializable {
 		this.longDescription = longDescription;
 	}
 
+	@Column(name = "YEAR")
 	public Year getYear() {
 		return year;
 	}
@@ -95,6 +88,7 @@ public class TvShow implements Serializable {
 		this.year = year;
 	}
 
+	@Column(name = "RECOMMENDED_AGE")
 	public byte getRecommendedAge() {
 		return recommendedAge;
 	}
@@ -103,6 +97,7 @@ public class TvShow implements Serializable {
 		this.recommendedAge = recommendedAge;
 	}
 
+	@Column(name = "ADVERTISING", nullable = true)
 	public String getAdvertising() {
 		return advertising;
 	}
@@ -111,6 +106,7 @@ public class TvShow implements Serializable {
 		this.advertising = advertising;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tvShow")
 	public List<Season> getSeasons() {
 		return seasons;
 	}
@@ -119,6 +115,7 @@ public class TvShow implements Serializable {
 		this.seasons = seasons;
 	}
 
+	@ManyToMany(mappedBy = "tvShows")
 	public List<Category> getCategories() {
 		return categories;
 	}
@@ -127,14 +124,13 @@ public class TvShow implements Serializable {
 		this.categories = categories;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tvShow")
 	public List<TvShowAwards> getAwardForShow() {
-		return awardsForShow;
+		return tvShowAwards;
 	}
 
-	public void setAwardForShow(List<TvShowAwards> awardForShow) {
-		this.awardsForShow = awardForShow;
+	public void setAwardForShow(List<TvShowAwards> tvShowAwards) {
+		this.tvShowAwards = tvShowAwards;
 	}
-	
-	
 
 }

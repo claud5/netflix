@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
-public class TvShow2 {
+public class TvShowChapters {
 	private Long id;
 	private String name;
 	private String shortDescription;
