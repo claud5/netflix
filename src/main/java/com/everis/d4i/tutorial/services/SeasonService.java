@@ -7,9 +7,8 @@ import com.everis.d4i.tutorial.json.SeasonRest;
 
 public interface SeasonService {
 
-	List<SeasonRest> getSeasonsByTvShow(final Long tvShowId) throws NetflixException;
+	List<SeasonRest> getSeasonsByTvShow(Long tvShowId) throws NetflixException;
 
-	SeasonRest getSeasonByTvShowIdAndSeasonNumber(final Long tvShowId, final short seasonNumber)
-			throws NetflixException;
+	SeasonRest getSeasonByTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber) throws NetflixException;
 
 }
