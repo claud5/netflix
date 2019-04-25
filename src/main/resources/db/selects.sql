@@ -20,3 +20,4 @@ select * from seasons;
 
 select * from category_for_show;
 
+>>>>>>> origin/develope
