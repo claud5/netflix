@@ -10,6 +10,6 @@ public interface ActorController {
 
 	NetflixResponse<List<ActorRest>> getActors() throws NetflixException;
 
-	NetflixResponse<ActorRest> getActorsById(Long id) throws NetflixException;
+	NetflixResponse<ActorRest> getActorsById(final Long id) throws NetflixException;
 
 }

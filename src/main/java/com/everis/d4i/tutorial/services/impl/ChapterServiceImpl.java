@@ -25,23 +25,23 @@ public class ChapterServiceImpl implements ChapterService {
 	private ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	public List<ChapterRest> getChaptersByTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber)
+	public List<ChapterRest> getChaptersByTvShowIdAndSeasonNumber(final Long tvShowId, final short seasonNumber)
 			throws NetflixException {
 		return chapterRepository.findBySeasonTvShowIdAndSeasonNumber(tvShowId, seasonNumber).stream()
 				.map(chapter -> modelMapper.map(chapter, ChapterRest.class)).collect(Collectors.toList());
 	}
 
 	@Override
-	public ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
-			short chapterNumber) throws NetflixException {
+	public ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(final Long tvShowId,
+			final short seasonNumber, final short chapterNumber) throws NetflixException {
 
 		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
 		return modelMapper.map(chapter, ChapterRest.class);
 	}
 
 	@Override
-	public List<ActorRest> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId,
-			short seasonNumber, short chapterNumber) throws NetflixException {
+	public List<ActorRest> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(final Long tvShowId,
+			final short seasonNumber, final short chapterNumber) throws NetflixException {
 		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
 
 		return chapter.getActors().stream().map(actors -> modelMapper.map(actors, ActorRest.class))
@@ -49,8 +49,8 @@ public class ChapterServiceImpl implements ChapterService {
 	}
 
 	@Override
-	public ChapterRest updateChpaterName(Long tvShowId, short seasonNumber, short chapterNumber, String name)
-			throws NetflixException {
+	public ChapterRest updateChpaterName(final Long tvShowId, final short seasonNumber, final short chapterNumber,
+			final String name) throws NetflixException {
 		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
 		chapter.setName(name);
 		return saveChapter(chapter);

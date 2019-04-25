@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.everis.d4i.tutorial.entities.Actors;
+import com.everis.d4i.tutorial.entities.Actor;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.ActorRest;
 import com.everis.d4i.tutorial.repositories.ActorRepository;
@@ -24,9 +24,9 @@ import com.everis.d4i.tutorial.utils.constants.TestsConstants;
 
 public class ActorServiceImplTest {
 
-	private Actors actor;
+	private Actor actor;
 	private ActorRest actorRest;
-	private List<Actors> actorList;
+	private List<Actor> actorList;
 	private List<ActorRest> actorRestList;
 
 	public static final int ACTOR_LIST_LENGTH = 6;
@@ -51,10 +51,10 @@ public class ActorServiceImplTest {
 	}
 	
 	//INIT
-	private Actors createActor() {
+	private Actor createActor() {
 
 		// Creem actor que ens retorna bbdd
-		Actors actor = new Actors();
+		Actor actor = new Actor();
 		actor.setId(TestsConstants.ACTOR_ID);
 		actor.setName(TestsConstants.ACTOR_NAME);
 		actor.setSurname(TestsConstants.ACTOR_SURNAME);
@@ -76,8 +76,8 @@ public class ActorServiceImplTest {
 		return actor;
 	}
 
-	private List<Actors> createActorsList(){
-		List<Actors> list = new ArrayList<Actors>();
+	private List<Actor> createActorsList(){
+		List<Actor> list = new ArrayList<Actor>();
 		
 		for (int i = 0; i < ACTOR_LIST_LENGTH; i++) {
 			list.add(actor);

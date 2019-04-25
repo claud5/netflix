@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.everis.d4i.tutorial.entities.Actors;
+import com.everis.d4i.tutorial.entities.Actor;
 import com.everis.d4i.tutorial.entities.Chapter;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.ActorRest;
@@ -58,7 +58,7 @@ public class ChapterServiceImplTest {
 		returnedChapter.setNumber(TestsConstants.CHAPTER_NUMBER);
 		returnedChapter.setDuration(TestsConstants.CHAPTER_DURATION);
 		
-		List<Actors> actors = createActorsList();
+		List<Actor> actors = createActorsList();
 		returnedChapter.setActors(actors);
 		
 	}
@@ -84,9 +84,9 @@ public class ChapterServiceImplTest {
 		}
 	}
 
-	private List<Actors> createActorsList() {
-		List<Actors> list = new ArrayList<Actors>();
-		Actors actor = new Actors();
+	private List<Actor> createActorsList() {
+		List<Actor> list = new ArrayList<Actor>();
+		Actor actor = new Actor();
 		actor.setId(TestsConstants.ACTOR_ID);
 		actor.setName(TestsConstants.ACTOR_NAME);
 		actor.setSurname(TestsConstants.ACTOR_SURNAME);

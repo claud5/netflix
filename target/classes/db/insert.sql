@@ -49,7 +49,7 @@ INSERT INTO ACTORS_IN_CHAPTER (ID_ACTOR, ID_CHAPTER) VALUES
     (1,1),
 	(2,1),
     (1,4);
-    
+    update actors_in_chapter set id_actor = 2 where id = 11;
 
 INSERT INTO CATEGORY_FOR_SHOW (ID, SHOW_ID, CATEGORY_ID) VALUES
 	(1,1,3),

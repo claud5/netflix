@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryRest disableCategory(Long id) throws NetflixException {
+	public CategoryRest disableCategory(final Long id) throws NetflixException {
 		Category category = findById(id);
 		category.setAvailable(false);
 
@@ -49,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
 				.map(category -> modelMapper.map(category, CategoryRest.class)).collect(Collectors.toList());
 	}
 
-	private Category findById(Long id) throws NetflixException {
+	private Category findById(final Long id) throws NetflixException {
 		return categoryRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CATEGORY));
 	}

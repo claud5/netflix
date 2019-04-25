@@ -19,6 +19,7 @@ public class RestConstants {
 	public static final String RESOURCE_TV_SHOW_ADD_CATEGORY = "/{tvShowId}/category";
 	public static final String RESOURCE_TV_SHOW_DELETE = "/{tvShowId}/delete";
 	public static final String RESOURCE_TV_SHOW_CHAPTER_FROM_ACTOR = "/chapters/actor/{actorId}";
+	
 	//SEASONS
 	public static final String RESOURCE_SEASON = "/tv-shows/{tvShowId}/seasons";
 	
@@ -33,7 +34,10 @@ public class RestConstants {
 	//AWARDS
 	public static final String RESOURCE_AWARD ="/awards";
 	public static final String RESOURCE_AWARD_IN_TVSHOW = "/tv-show/{tvShowId}";
-
+	public static final String RESOURCE_SET_AWARD_TVSHOW = "/tv-show/";
+	public static final String RESOURCE_AWARD_DELETE = "/{awardId}/delete";
+	public static final String RESOURCE_AWARD_UPDATE_NAME = "{awardId}/newName";
+	
 	// Specific values
 	public static final String PARAMETER_ID = "/{id}";
 	public static final String PARAMETER_NUMBER = "/{number}";

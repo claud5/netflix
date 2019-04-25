@@ -1,5 +1,6 @@
 package com.everis.d4i.tutorial.repositories;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public interface TvShowRepository extends JpaRepository<TvShow, Long> {
 	
 	Optional<TvShow> findById(Long id);
 	
-	List<TvShow> findBySeasonsChaptersActorsId(Long actorId);
+	HashSet<TvShow> findBySeasonsChaptersActorsId(Long actorId);
 	
-	
+	List<TvShow> findBySeasonsChaptersActorsIdAndId(Long actorId, Long id);
 }
