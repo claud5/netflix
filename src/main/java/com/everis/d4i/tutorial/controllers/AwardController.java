@@ -14,4 +14,6 @@ public interface AwardController {
 	NetflixResponse<AwardRest> setAwardToTvShow(final Long awardId, final Long tvShowId) throws NetflixException;
 
 	NetflixResponse<Boolean> deleteAward(final Long awardId) throws NetflixException;
+
+	NetflixResponse<AwardRest> updateAwardName(final Long awardId, final String newName) throws NetflixException;
 }

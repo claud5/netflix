@@ -13,4 +13,6 @@ public interface AwardService {
 	AwardRest setAwardToTvShow(final Long awardId, final Long tvShowId) throws NetflixException;
 
 	void deleteAward(final Long id) throws NetflixException;
+
+	AwardRest updateAwardName(final Long awardId, final String newName) throws NetflixException;
 }
