@@ -29,7 +29,7 @@ public class SeasonControllerImpl implements SeasonController {
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<List<SeasonRest>> getSeasonsByTvShow(Long tvShowId) throws NetflixException {
+	public NetflixResponse<List<SeasonRest>> getSeasonsByTvShow(final Long tvShowId) throws NetflixException {
 		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
 				seasonService.getSeasonsByTvShow(tvShowId));
 	}
@@ -37,8 +37,8 @@ public class SeasonControllerImpl implements SeasonController {
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = RestConstants.PARAMETER_NUMBER, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<SeasonRest> getSeasonByTvShowIdAndSeasonNumber(@PathVariable Long tvShowId,
-			@PathVariable short number) throws NetflixException {
+	public NetflixResponse<SeasonRest> getSeasonByTvShowIdAndSeasonNumber(@PathVariable final Long tvShowId,
+			@PathVariable final short number) throws NetflixException {
 		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
 				seasonService.getSeasonByTvShowIdAndSeasonNumber(tvShowId, number));
 	}

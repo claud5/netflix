@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -41,13 +40,13 @@ public class Chapter implements Serializable {
 	private Season season;
 
 	@ManyToMany(mappedBy = "chapters")
-	private List<Actors> actors = new ArrayList<>();
+	private List<Actor> actors = new ArrayList<>();
 
-	public List<Actors> getActors() {
+	public List<Actor> getActors() {
 		return actors;
 	}
 
-	public void setActors(List<Actors> actors) {
+	public void setActors(List<Actor> actors) {
 		this.actors = actors;
 	}
 

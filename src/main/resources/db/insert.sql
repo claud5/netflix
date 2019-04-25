@@ -1,7 +1,8 @@
-INSERT INTO CATEGORIES(ID, NAME) VALUES 
-	(1, 'TERROR'), 
-	(2, 'COMEDIA'), 
-	(3, 'ACCIÓN');
+INSERT INTO CATEGORIES(ID, NAME, AVAILABLE) VALUES 
+	(1, 'TERROR',1 ), 
+	(2, 'COMEDIA',1 ), 
+	(3, 'ACCIÓN', 1);
+    
     
 INSERT INTO TV_SHOWS(ID, NAME, SHORT_DESC, LONG_DESC, YEAR, RECOMMENDED_AGE) VALUES 
 	(1, 'Juego de tronos', 'Descripción corta', 'Descripción larga', '2012', 16), 
@@ -46,7 +47,12 @@ INSERT INTO ACTORS  (NAME, SURNAME, DATE_OF_BIRTH) VALUES
 INSERT INTO ACTORS_IN_CHAPTER (ID_ACTOR, ID_CHAPTER) VALUES
 	(1,1),
     (1,1),
-	(2,1);
-    
+	(2,1),
+    (1,4);
+    update actors_in_chapter set id_actor = 2 where id = 11;
 
+INSERT INTO CATEGORY_FOR_SHOW (ID, SHOW_ID, CATEGORY_ID) VALUES
+	(1,1,3),
+    (2,2,1),
+    (3,3,2);
     

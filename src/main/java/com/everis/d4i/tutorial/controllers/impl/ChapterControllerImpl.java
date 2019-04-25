@@ -32,8 +32,8 @@ public class ChapterControllerImpl implements ChapterController {
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<List<ChapterRest>> getChaptersByTvShowIdAndSeasonNumber(@PathVariable Long tvShowId,
-			@PathVariable short seasonNumber) throws NetflixException {
+	public NetflixResponse<List<ChapterRest>> getChaptersByTvShowIdAndSeasonNumber(@PathVariable final Long tvShowId,
+			@PathVariable final short seasonNumber) throws NetflixException {
 		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
 				chapterService.getChaptersByTvShowIdAndSeasonNumber(tvShowId, seasonNumber));
 	}
@@ -41,8 +41,10 @@ public class ChapterControllerImpl implements ChapterController {
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = RestConstants.PARAMETER_NUMBER, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<ChapterRest> getChapterByTvShowIdAndSeasonNumberAndChapterNumber(@PathVariable Long tvShowId,
-			@PathVariable short seasonNumber, @PathVariable short number) throws NetflixException {
+	public NetflixResponse<ChapterRest> getChapterByTvShowIdAndSeasonNumberAndChapterNumber(
+			@PathVariable final Long tvShowId, @PathVariable final short seasonNumber, @PathVariable final short number)
+			throws NetflixException {
+
 		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
 				chapterService.getChapterByTvShowIdAndSeasonNumberAndChapterNumber(tvShowId, seasonNumber, number));
 	}
@@ -50,18 +52,21 @@ public class ChapterControllerImpl implements ChapterController {
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = RestConstants.RESOURCE_ACTORS_IN_CHAPTER, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<List<ActorRest>> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(@PathVariable Long tvShowId,
-			@PathVariable short seasonNumber, @PathVariable short chapterNumber) throws NetflixException {
+	public NetflixResponse<List<ActorRest>> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(
+			@PathVariable Long tvShowId, @PathVariable final short seasonNumber,
+			@PathVariable final short chapterNumber) throws NetflixException {
 		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-				chapterService.getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(tvShowId, seasonNumber, chapterNumber ));
+				chapterService.getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(tvShowId, seasonNumber,
+						chapterNumber));
 	}
 
-	
 	@Override
 	@ResponseStatus(HttpStatus.OK)
 	@PatchMapping(value = RestConstants.RESOURCE_CHAPTER_UPDATE_NAME, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<ChapterRest> updateChapterName(@RequestParam Long tvShowId, @RequestParam short seasonNumber, @RequestParam short chapterNumber, @RequestParam String name) throws NetflixException {
+	public NetflixResponse<ChapterRest> updateChapterName(@PathVariable final Long tvShowId,
+			@PathVariable final short seasonNumber, @PathVariable final short chapterNumber,
+			@RequestParam final String newName) throws NetflixException {
 		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-				chapterService.updateChpaterName(tvShowId, seasonNumber, chapterNumber, name));
+				chapterService.updateChpaterName(tvShowId, seasonNumber, chapterNumber, newName));
 	}
 }

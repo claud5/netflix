@@ -1,7 +1,6 @@
 package com.everis.d4i.tutorial.services.impl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -26,43 +25,39 @@ public class ChapterServiceImpl implements ChapterService {
 	private ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	public List<ChapterRest> getChaptersByTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber)
+	public List<ChapterRest> getChaptersByTvShowIdAndSeasonNumber(final Long tvShowId, final short seasonNumber)
 			throws NetflixException {
 		return chapterRepository.findBySeasonTvShowIdAndSeasonNumber(tvShowId, seasonNumber).stream()
 				.map(chapter -> modelMapper.map(chapter, ChapterRest.class)).collect(Collectors.toList());
 	}
 
 	@Override
-	public ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
-			short chapterNumber) throws NetflixException {
-		Chapter chapter = chapterRepository
-				.findBySeasonTvShowIdAndSeasonNumberAndNumber(tvShowId, seasonNumber, chapterNumber)
-				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
+	public ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(final Long tvShowId,
+			final short seasonNumber, final short chapterNumber) throws NetflixException {
+
+		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
 		return modelMapper.map(chapter, ChapterRest.class);
 	}
 
 	@Override
-	public List<ActorRest> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId,
-			short seasonNumber, short chapterNumber) throws NetflixException {
-		Chapter chapter = chapterRepository
-				.findBySeasonTvShowIdAndSeasonNumberAndNumber(tvShowId, seasonNumber, chapterNumber)
-				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
-		
-		return chapter.getActors().stream().map(actors -> modelMapper.map(actors, ActorRest.class)).collect(Collectors.toList());
-	}
+	public List<ActorRest> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(final Long tvShowId,
+			final short seasonNumber, final short chapterNumber) throws NetflixException {
+		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
 
+		return chapter.getActors().stream().map(actors -> modelMapper.map(actors, ActorRest.class))
+				.collect(Collectors.toList());
+	}
 
 	@Override
-	public ChapterRest updateChpaterName(Long tvShowId, short seasonNumber, short chapterNumber, String name)
-			throws NetflixException {
-			Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
-			chapter.setName(name);
-			return saveChapter(chapter);
+	public ChapterRest updateChpaterName(final Long tvShowId, final short seasonNumber, final short chapterNumber,
+			final String name) throws NetflixException {
+		Chapter chapter = getChapterById(tvShowId, seasonNumber, chapterNumber);
+		chapter.setName(name);
+		return saveChapter(chapter);
 	}
 
-	private Chapter getChapterById(Long tvShowId, short seasonNumber, short chapterNumber) throws NetflixException{
-		return chapterRepository
-				.findBySeasonTvShowIdAndSeasonNumberAndNumber(tvShowId, seasonNumber, chapterNumber)
+	private Chapter getChapterById(Long tvShowId, short seasonNumber, short chapterNumber) throws NetflixException {
+		return chapterRepository.findBySeasonTvShowIdAndSeasonNumberAndNumber(tvShowId, seasonNumber, chapterNumber)
 				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
 	}
 

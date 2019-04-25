@@ -9,16 +9,16 @@ import com.everis.d4i.tutorial.responses.NetflixResponse;
 
 public interface ChapterController {
 
-	NetflixResponse<List<ChapterRest>> getChaptersByTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber)
-			throws NetflixException;
+	NetflixResponse<List<ChapterRest>> getChaptersByTvShowIdAndSeasonNumber(final Long tvShowId,
+			final short seasonNumber) throws NetflixException;
 
-	NetflixResponse<ChapterRest> getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
-			short chapterNumber) throws NetflixException;
+	NetflixResponse<ChapterRest> getChapterByTvShowIdAndSeasonNumberAndChapterNumber(final Long tvShowId,
+			final short seasonNumber, final short chapterNumber) throws NetflixException;
 
-	NetflixResponse<List<ActorRest>> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
-			short chapterNumber) throws NetflixException;
+	NetflixResponse<List<ActorRest>> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(final Long tvShowId,
+			final short seasonNumber, final short chapterNumber) throws NetflixException;
 
-	NetflixResponse<ChapterRest> updateChapterName(Long tvShowId, short seasonNumber,
-			short chapterNumber, String name) throws NetflixException;
+	NetflixResponse<ChapterRest> updateChapterName(final Long tvShowId, final short seasonNumber,
+			final short chapterNumber, final String newName) throws NetflixException;
 
 }

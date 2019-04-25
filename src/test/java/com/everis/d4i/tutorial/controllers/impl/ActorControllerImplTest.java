@@ -15,7 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 
-import com.everis.d4i.tutorial.entities.Actors;
+import com.everis.d4i.tutorial.entities.Actor;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.ActorRest;
 import com.everis.d4i.tutorial.repositories.ActorRepository;
@@ -23,17 +23,14 @@ import com.everis.d4i.tutorial.responses.NetflixResponse;
 import com.everis.d4i.tutorial.services.impl.ActorServiceImpl;
 import com.everis.d4i.tutorial.utils.constants.CommonConstants;
 import com.everis.d4i.tutorial.utils.constants.ExceptionConstants;
+import com.everis.d4i.tutorial.utils.constants.TestsConstants;
 
 
 public class ActorControllerImplTest {
 
-	private static final long ACTOR_ID = 1L;
-	private static final long ACTOR_WRONG_ID = 10L;
-	private static final int INDEX = 0;
-
-	private Actors actor;
+	private Actor actor;
 	private ActorRest actorRest;
-	private List<Actors> actorList;
+	private List<Actor> actorList;
 	private List<ActorRest> actorRestList;
 
 	@Mock
@@ -50,10 +47,10 @@ public class ActorControllerImplTest {
 	}
 	
 	private void createActorsStructure() {
-		this.actor = new Actors();
+		this.actor = new Actor();
 		this.actorRest = new ActorRest();
 		
-		this.actorList = new ArrayList<Actors>();
+		this.actorList = new ArrayList<Actor>();
 		this.actorList.add(actor);
 		this.actorRestList = new ArrayList<ActorRest>();
 		this.actorRestList.add(actorRest);
@@ -63,11 +60,11 @@ public class ActorControllerImplTest {
 	@Test
 	public void getOneActorShouldBeOk() throws Exception {
 		// given
-		Mockito.when(actorRepository.findById(ACTOR_ID)).thenReturn(Optional.of(actor));
-		Mockito.when(actorService.getActorsById(ACTOR_ID)).thenReturn(actorRest);
+		Mockito.when(actorRepository.findById(TestsConstants.ACTOR_ID)).thenReturn(Optional.of(actor));
+		Mockito.when(actorService.getActorsById(TestsConstants.ACTOR_ID)).thenReturn(actorRest);
 
 		// when
-		NetflixResponse<ActorRest> netflixResponse = actorController.getActorsById(ACTOR_ID);
+		NetflixResponse<ActorRest> netflixResponse = actorController.getActorsById(TestsConstants.ACTOR_ID);
 
 		
 		// then
@@ -91,21 +88,21 @@ public class ActorControllerImplTest {
 		//then
 		assertEquals(CommonConstants.SUCCESS, netflixResponse.getStatus());
 		assertEquals(String.valueOf(HttpStatus.OK),netflixResponse.getCode());
-		assertEquals(actorRestList.get(INDEX), netflixResponse.getData().get(INDEX));
+		assertEquals(actorRestList.get(TestsConstants.INDEX), netflixResponse.getData().get(TestsConstants.INDEX));
 		
 	}
 	
-
+	//KO
 	@Test(expected=NotFoundException.class)
 	public void shouldreturnAnActorKo() throws Exception {
 
 		//given
-		Mockito.when(actorRepository.findById(ACTOR_WRONG_ID)).thenReturn(Optional.empty());
-		Mockito.when(actorService.getActorsById(ACTOR_WRONG_ID))
+		Mockito.when(actorRepository.findById(TestsConstants.ACTOR_WRONG_ID)).thenReturn(Optional.empty());
+		Mockito.when(actorService.getActorsById(TestsConstants.ACTOR_WRONG_ID))
 		.thenThrow(new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_SHOW));
 		
 		// when
-		actorController.getActorsById(ACTOR_WRONG_ID);
+		actorController.getActorsById(TestsConstants.ACTOR_WRONG_ID);
 
 		// then
 		fail();

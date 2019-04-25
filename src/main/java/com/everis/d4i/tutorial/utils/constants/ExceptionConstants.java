@@ -8,6 +8,8 @@ public class ExceptionConstants {
 	public static final String MESSAGE_INEXISTENT_CHAPTER = "CHAPTER INEXISTENT - Chapter does not exist";
 	public static final String MESSAGE_INEXISTENT_ACTOR = "ACTOR INEXISTENT - Actor does not exist";
 	public static final String MESSAGE_INEXISTENT_SHOW = "TV-SHOW INEXISTENT - Show does not exist";
+	public static final String MESSAGE_INEXISTENT_CATEGORY = "CATEGORY INEXISTENT - Category does not exist";
+	public static final String MESSAGE_INEXISTENT_AWARD = "AWARD INEXISTENT - Award does not exist";
 
 	private ExceptionConstants() {
 		throw new IllegalStateException("Utility Class");

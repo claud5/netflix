@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.everis.d4i.tutorial.entities.Actors;
+import com.everis.d4i.tutorial.entities.Actor;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.ActorRest;
@@ -28,16 +28,18 @@ public class ActorServiceImpl implements ActorService {
 
 		return actorRepository.findAll().stream().map(actor -> modelMapper.map(actor, ActorRest.class))
 				.collect(Collectors.toList());
-
 	}
 
 	@Override
-	public ActorRest getActorsById(long id) throws NetflixException {
-		Actors actor = actorRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
-		
+	public ActorRest getActorsById(final long id) throws NetflixException {
+		Actor actor = getById(id);
+
 		return modelMapper.map(actor, ActorRest.class);
 
 	}
 
+	private Actor getById(final Long id) throws NetflixException {
+		return actorRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CHAPTER));
+	}
 }

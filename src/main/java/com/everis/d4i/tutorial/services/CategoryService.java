@@ -9,4 +9,7 @@ public interface CategoryService {
 
 	List<CategoryRest> getCategories() throws NetflixException;
 
+	CategoryRest disableCategory(final Long id) throws NetflixException;
+
+	List<CategoryRest> getAvailableCategories() throws NetflixException;
 }
