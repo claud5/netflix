@@ -8,9 +8,9 @@ import com.everis.d4i.tutorial.responses.NetflixResponse;
 
 public interface SeasonController {
 
-	NetflixResponse<List<SeasonRest>> getSeasonsByTvShow(final Long tvShowId) throws NetflixException;
+	NetflixResponse<List<SeasonRest>> getSeasonsByTvShow(Long tvShowId) throws NetflixException;
 
-	NetflixResponse<SeasonRest> getSeasonByTvShowIdAndSeasonNumber(final Long tvShowId, final short seasonNumber)
+	NetflixResponse<SeasonRest> getSeasonByTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber)
 			throws NetflixException;
 
 }

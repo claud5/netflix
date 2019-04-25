@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.everis.d4i.tutorial.entities.Chapter;
@@ -19,6 +17,5 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	Optional<Chapter> findBySeasonTvShowIdAndSeasonNumberAndNumber(Long tvShowId, short seasonNumber,
 			short chapterNumber);
 	
-	List<Chapter> findByActorsId(Long id);
-	
+
 }

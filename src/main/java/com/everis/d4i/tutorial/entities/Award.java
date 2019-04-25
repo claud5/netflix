@@ -1,8 +1,6 @@
 package com.everis.d4i.tutorial.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,8 +31,8 @@ public class Award implements Serializable {
 	@Column(name = "NAME", unique = true)
 	private String name;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "award")
-	private List<TvShowAwards> awardsForShow = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "awards")
+	private List<AwardForShow> award_for_show;
 
 	
 	public Long getId() {
@@ -50,16 +50,6 @@ public class Award implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public List<TvShowAwards> getAwardForShow() {
-		return awardsForShow;
-	}
-
-	public void setAwardForShow(List<TvShowAwards> awardForShow) {
-		this.awardsForShow = awardForShow;
-	}
-	
-	
 	
 
 }
