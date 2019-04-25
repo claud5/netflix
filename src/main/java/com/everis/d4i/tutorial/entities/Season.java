@@ -1,6 +1,7 @@
 package com.everis.d4i.tutorial.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,7 +37,7 @@ public class Season implements Serializable {
 	private TvShow tvShow;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "season")
-	private List<Chapter> chapters;
+	private List<Chapter> chapters = new ArrayList<>();
 
 	public Long getId() {
 		return id;

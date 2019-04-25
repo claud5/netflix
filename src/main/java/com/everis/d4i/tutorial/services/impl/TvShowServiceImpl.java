@@ -1,7 +1,9 @@
 package com.everis.d4i.tutorial.services.impl;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -10,13 +12,13 @@ import org.springframework.stereotype.Service;
 
 import com.everis.d4i.tutorial.entities.Category;
 import com.everis.d4i.tutorial.entities.Chapter;
-import com.everis.d4i.tutorial.entities.ChapterInShow;
 import com.everis.d4i.tutorial.entities.TvShow;
+import com.everis.d4i.tutorial.entities.TvShowChapters;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
-import com.everis.d4i.tutorial.json.ChapterInShowRest;
 import com.everis.d4i.tutorial.json.ChapterRest;
 import com.everis.d4i.tutorial.json.TvShowRest;
+import com.everis.d4i.tutorial.repositories.ActorRepository;
 import com.everis.d4i.tutorial.repositories.CategoryRepository;
 import com.everis.d4i.tutorial.repositories.ChapterRepository;
 import com.everis.d4i.tutorial.repositories.TvShowRepository;
@@ -32,13 +34,17 @@ public class TvShowServiceImpl implements TvShowService {
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private ChapterRepository chapterRepository;
+	@Autowired
+	private ActorRepository actorRepository;
 
 	private ModelMapper modelMapper = new ModelMapper();
 
 	private static final int FIRST_POSITION = 0;
+	private static final int SECOND_POSITION = 1;
+	private static final int ONE_POSITION = 1;
 
 	@Override
-	public List<TvShowRest> getTvShowsByCategory(Long categoryId) throws NetflixException {
+	public List<TvShowRest> getTvShowsByCategory(final Long categoryId) throws NetflixException {
 
 		return tvShowRepository.findByCategoriesId(categoryId).stream()
 				.map(tvShow -> modelMapper.map(tvShow, TvShowRest.class)).collect(Collectors.toList());
@@ -46,7 +52,7 @@ public class TvShowServiceImpl implements TvShowService {
 	}
 
 	@Override
-	public TvShowRest getTvShowById(Long id) throws NetflixException {
+	public TvShowRest getTvShowById(final Long id) throws NetflixException {
 
 		TvShow show = getById(id);
 
@@ -54,7 +60,7 @@ public class TvShowServiceImpl implements TvShowService {
 	}
 
 	@Override
-	public TvShowRest updateName(String name, Long id) throws NetflixException {
+	public TvShowRest updateName(final String name, final Long id) throws NetflixException {
 		TvShow show = getById(id);
 
 		show.setName(name);
@@ -63,76 +69,67 @@ public class TvShowServiceImpl implements TvShowService {
 	}
 
 	@Override
-	public TvShowRest addCategory(Long tvShowId, Long categoryId) throws NetflixException {
+	public TvShowRest addCategory(final Long tvShowId, final Long categoryId) throws NetflixException {
 		TvShow show = getById(tvShowId);
 		Category category = categoryRepository.findById(categoryId)
 				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_CATEGORY));
 
-		List<Category> categoriesList = show.getCategories();
-		categoriesList.add(category);
-		show.setCategories(categoriesList);
+		show.getCategories().add(category);
+		category.getTvShows().add(show);
 
-		List<TvShow> showList = category.getTvShows();
-		showList.add(show);
-		category.setTvShows(showList);
 		categoryRepository.saveAndFlush(category);
 
 		return modelMapper.map(saveTvShow(show), TvShowRest.class);
 	}
 
 	@Override
-	public Boolean deleteTvShowById(Long id) {
-		try {
-			tvShowRepository.deleteById(id);
-			return true;
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
+	public void deleteTvShowById(final Long id) throws NetflixException{
+		tvShowRepository.deleteById(id);
 	}
 
 	@Override
-	public List<ChapterInShow> getTvShowChapterFromActor(Long actorId) throws NetflixException {
-		List<ChapterInShow> chapterInShow = new LinkedList<ChapterInShow>();
-		List<TvShow> tvShowsByActor = tvShowRepository.findBySeasonsChaptersActorsId(actorId);
+	public List<TvShowChapters> getTvShowChapterFromActor(final Long actorId) throws NetflixException {
+		HashSet<TvShow> tvShowsByActor = tvShowRepository.findBySeasonsChaptersActorsId(actorId);
 
-		List<TvShow> cleanTvShowByActor = new LinkedList<TvShow>();
+		Map<Long, List<TvShow>> cleanTvShowByActor = tvShowsByActor.stream()
+				.collect(Collectors.groupingBy(TvShow::getId));
 
-		List<Chapter> chapterList = chapterRepository.findByActorsId(actorId);
-		List<ChapterRest> chapterRestList;
-
-		cleanTvShowByActor.add(tvShowsByActor.get(FIRST_POSITION));
-		for (int i = FIRST_POSITION + 1; i < tvShowsByActor.size(); i++) {
-			if (!tvShowsByActor.get(i).equals(tvShowsByActor.get(i - 1))) {
-				cleanTvShowByActor.add(tvShowsByActor.get(i));
-			}
-		}
-
-		for (int i = 0; i < cleanTvShowByActor.size(); i++) {
-			LinkedList<Chapter> finalChapterList = new LinkedList<Chapter>();
-
-			for (int j = 0; j < chapterList.size(); j++) {
-				if (chapterList.get(j).getSeason().getTvShow().getId() == cleanTvShowByActor.get(i).getId()) {
-					finalChapterList.add(chapterList.get(j));
-				}
-			}
-
-			chapterRestList = finalChapterList.stream().map(chapter -> modelMapper.map(chapter, ChapterRest.class))
-					.collect(Collectors.toList());
-
-			chapterInShow.add(new ChapterInShow(cleanTvShowByActor.get(i).getId(), cleanTvShowByActor.get(i).getName(),
-					cleanTvShowByActor.get(i).getShortDescription(), chapterRestList));
-		}
-
-		return chapterInShow;
+		return organizesTvShowByActor(cleanTvShowByActor, actorId);
 	}
 
-	private TvShow getById(Long id) throws NotFoundException {
+	private List<TvShowChapters> organizesTvShowByActor(final Map<Long, List<TvShow>> cleanTvShowByActor, final Long actorId) {
+		List<Chapter> chapters = chapterRepository.findByActorsId(actorId);
+		List<TvShowChapters> tvShowList = new ArrayList<TvShowChapters>();
+
+		cleanTvShowByActor.entrySet().stream().forEach(show -> show.getValue().stream().forEach(finalShow -> {
+			TvShowChapters tv = new TvShowChapters();
+			tv.setId(finalShow.getId());
+			tv.setName(finalShow.getName());
+			tv.setShortDescription(finalShow.getShortDescription());
+			tv.setYear(finalShow.getYear());
+			List<Chapter> chaptList = new ArrayList<Chapter>();
+
+			chapters.stream().forEach(chapter -> {
+				if (chapter.getSeason().getTvShow().getId().equals(tv.getId())) {
+					chaptList.add(chapter);
+				}
+			});
+			tv.setChapters(chaptList.stream().map(chapter -> modelMapper.map(chapter, ChapterRest.class))
+					.collect(Collectors.toList()));
+			tvShowList.add(tv);
+
+		}));
+
+		return tvShowList;
+	}
+
+	private TvShow getById(final Long id) throws NotFoundException {
 		return tvShowRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_SHOW));
 
 	}
 
-	private TvShow saveTvShow(TvShow show) {
+	private TvShow saveTvShow(final TvShow show) {
 		return tvShowRepository.saveAndFlush(show);
 	}
 

@@ -8,15 +8,16 @@ import com.everis.d4i.tutorial.json.ChapterRest;
 
 public interface ChapterService {
 
-	List<ChapterRest> getChaptersByTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber) throws NetflixException;
+	List<ChapterRest> getChaptersByTvShowIdAndSeasonNumber(final Long tvShowId, final short seasonNumber)
+			throws NetflixException;
 
-	ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
-			short chapterNumber) throws NetflixException;
+	ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(final Long tvShowId, final short seasonNumber,
+			final short chapterNumber) throws NetflixException;
 
-	List<ActorRest> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber (Long tvShowId, short seasonNumber,
-					short chapterNumber) throws NetflixException;
+	List<ActorRest> getActorsFromChapterByTvShowIdAndSeasonNumberAndChapterNumber(final Long tvShowId,
+			final short seasonNumber, final short chapterNumber) throws NetflixException;
 
-	ChapterRest updateChpaterName  (Long tvShowId, short seasonNumber, short chapterNumber, String name) throws NetflixException;
-	
-	
+	ChapterRest updateChpaterName(final Long tvShowId, final short seasonNumber, final short chapterNumber,
+			final String name) throws NetflixException;
+
 }

@@ -10,7 +10,7 @@ public interface CategoryController {
 
 	NetflixResponse<List<CategoryRest>> getCategories() throws NetflixException;
 
-	NetflixResponse<CategoryRest> deleteCategoryAvailability(Long id) throws NetflixException;
+	NetflixResponse<CategoryRest> deleteCategoryAvailability(final Long id) throws NetflixException;
 
 	NetflixResponse<List<CategoryRest>> getAvailableCategories() throws NetflixException;
 }
